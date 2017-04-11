@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Algorithms
 {
@@ -25,7 +26,7 @@ namespace Algorithms
             return RootNode == null;
         }
 
-        public void Add(BstNode node, int data){
+        public void Insert(BstNode node, int data){
             var newNode = new BstNode(data);
             var tmp = node;
             
@@ -37,14 +38,14 @@ namespace Algorithms
                         tmp.Left = newNode;
                     }else{
                         tmp = tmp.Left;
-                        Add(tmp, data);
+                        Insert(tmp, data);
                     }
                 }else{
                     if(tmp.Right == null){
                         tmp.Right = newNode;
                     }else{
                         tmp = tmp.Right;
-                        Add(tmp, data);
+                        Insert(tmp, data);
                     }
                 }
 
@@ -101,6 +102,78 @@ namespace Algorithms
             PrintPostOrder(tmp.Left);
             PrintPostOrder(tmp.Right);
             Console.Write(tmp.Data + " ");
+        }
+
+        // Non-recursive(iterative) tree traversal
+        // 1) Create an empty stack S.
+        // 2) Initialize current node as root
+        // 3) Push the current node to S and set current = current->left until current is NULL
+        // 4) If current is NULL and stack is not empty then
+        //      a) Pop the top item from stack.
+        //      b) Print the popped item, set current = popped_item->right
+        //      c) Go to step 3.
+        // 5) If current is NULL and stack is empty then we are done.
+        public void IterativeInOrder(BstNode node){
+            var stack = new Stack<BstNode>();
+            var current = node;
+            var done = false;
+            while(!done){
+                if(current != null){
+                    stack.Push(current);
+                    current = current.Left;
+                }
+                else{
+                    if (stack.Count > 0)
+                    {
+                        var top = stack.Pop();
+                        Console.Write(top.Data + " ");
+                        current = top.Right;
+                    }else{
+                        done = true;
+                    }
+                } 
+            }
+            Console.WriteLine();
+        }
+
+        // Iterative PostOrder tree traversal
+        // 1. Add left child to stack
+        // 2. Add right child to stack
+        // 3. Print current data
+        public void IterativePostOrder(BstNode node){
+            var current = node;
+
+            var stack = new Stack<BstNode>();
+            stack.Push(current);
+
+            while(stack.Count > 0){
+                // todo
+            }
+        }
+
+        // Iterative PreOrder traversal
+        // 1. Print current data
+        // 2. Add right child to stack
+        // 3. Add left chile to stack
+        // Note:    that the right child is pushed first so 
+        //          that the left child is processed first
+        public void IterativePreOrder(BstNode node){
+            var current = node;
+
+            var stack = new Stack<BstNode>();
+            stack.Push(current);
+            
+            while(stack.Count > 0){
+                var val = stack.Pop();
+                Console.Write(val.Data + " ");
+                if(val.Right != null){
+                    stack.Push(val.Right);
+                }
+                if (val.Left != null)
+                {
+                    stack.Push(val.Left);
+                }
+            }
         }
     }
 }
