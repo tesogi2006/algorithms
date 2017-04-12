@@ -11,7 +11,7 @@ namespace Algorithms
 
             //RunQuicksortDemo();
 
-            var array = new int[]{10, 6, 15, 3, 8, 12, 18};
+            var array = new int[]{4, 6, 15, 3, 8, 12, 18};
             RunBinarySearchTreeDemo(array);
 
             //var objects = new object[]{34, 101, "Hello World", true, 'c', "34", 34};
@@ -40,7 +40,7 @@ namespace Algorithms
         }
 
         public static void RunBinarySearchTreeDemo(params int [] numbers){
-            var node = new BstNode(4);
+            var node = new BstNode(10);
             var bst = new BinaryTree(node);
             
             for (int i = 0; i < numbers.Length; i++)
@@ -53,7 +53,8 @@ namespace Algorithms
             //bst.Search(bst.RootNode, 10);
             //bst.IterativeInOrder(bst.RootNode);
             //bst.IterativePreOrder(bst.RootNode);
-            bst.IterativePostOrder(bst.RootNode);
+            //bst.IterativePostOrder(bst.RootNode);
+            bst.BFS(bst.RootNode);
         }
 
         public static void RunHashTableDemo(params object[] objects){

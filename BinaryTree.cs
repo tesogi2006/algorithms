@@ -175,5 +175,26 @@ namespace Algorithms
                 }
             }
         }
+
+        public void BFS(BstNode node){
+            var queue = new Queue<BstNode>();
+            queue.Enqueue(node);
+            while(queue.Count > 0){
+                var n = queue.Dequeue();
+                Console.Write(n.Data + " ");
+                if(n.Left != null){
+                    queue.Enqueue(n.Left);
+                }
+                if(n.Right != null){
+                    queue.Enqueue(n.Right);
+                }
+            }
+
+            Console.WriteLine();
+        }
+
+        public void DFS(BstNode node){
+            
+        }
     }
 }
